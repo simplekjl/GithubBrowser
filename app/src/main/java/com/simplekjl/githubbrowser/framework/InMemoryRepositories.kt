@@ -6,5 +6,4 @@ class InMemoryRepositories : LocalSource {
     override fun getDbInstance() {
         // do something for the local stuff
     }
-
 }

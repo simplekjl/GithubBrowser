@@ -1,11 +1,16 @@
 package com.simplekjl.githubbrowser.di
 
 import android.app.Application
+import com.simplekjl.data.DataSourceRepository
+import com.simplekjl.data.LocalSource
+import com.simplekjl.data.NetworkSource
 import com.simplekjl.data.client.GithubService
 import com.simplekjl.githubbrowser.BuildConfig
+import com.simplekjl.githubbrowser.framework.InMemoryRepositories
 import com.simplekjl.githubbrowser.framework.RepositoriesSource
 import com.simplekjl.githubbrowser.ui.MainViewModel
 import com.simplekjl.githubbrowser.ui.mapper.ResponseMapper
+import com.simplekjl.usecases.GetRepositoriesByKeyWord
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -22,10 +27,17 @@ class App : Application() {
 
     private val networkModule = createNetworkModule()
     private val mainModule = createMainModule()
+    private val dataModule = createDataModule()
+
+    private fun createDataModule() = module {
+        factory<NetworkSource> { RepositoriesSource() }
+        factory<LocalSource> { InMemoryRepositories() }
+        factory { DataSourceRepository(get(), get()) }
+    }
 
     private fun createMainModule() = module {
         factory { ResponseMapper(applicationContext) }
-        factory { RepositoriesSource() }
+        factory { GetRepositoriesByKeyWord(get()) }
         viewModel { MainViewModel(get(), get()) }
     }
 
@@ -59,7 +71,7 @@ class App : Application() {
             androidContext(this@App)
             androidFileProperties()
             modules(
-                listOf(
+                listOf(dataModule,
                     networkModule, mainModule
                 )
             )

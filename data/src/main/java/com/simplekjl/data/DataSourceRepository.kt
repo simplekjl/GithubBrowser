@@ -14,10 +14,10 @@ class DataSourceRepository(
         searchText: String
     ): Result<RepositoriesPayload> {
         val call = network.getGithubClient().searchRepositories(searchText)
-        if (call.isSuccessful) {
-            return Result.Success(call.body()!!)
+        return if (call.isSuccessful) {
+            Result.Success(call.body()!!)
         } else {
-            return Result.Error(Exception(call.message()))
+            Result.Error(Exception(call.message()))
         }
     }
 
