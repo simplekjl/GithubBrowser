@@ -1,6 +1,9 @@
 ext {
-    minVersion = 16
-    targetVersion = 30
-    codeVersion = 1
-    nameVersion = '1.0'
+    compile_version = 30
+    tools_version = "30.0.2"
+    min_version = 16
+    target_version = 30
+    code_version = 1
+    name_version = '1.0'
+    url_path = "\"https://api.github.com/search/\""
 }

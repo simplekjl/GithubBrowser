@@ -14,6 +14,9 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data
+                    android:host="${hostname}"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
     </application>

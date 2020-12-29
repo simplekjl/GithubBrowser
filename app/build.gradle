@@ -1,26 +1,49 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'de.mannodermaus.android-junit5'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
+apply from: "$rootProject.projectDir/.dependencies/appVersioning.gradle"
+apply from: "$rootProject.projectDir/.dependencies/testing/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/network/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/androidDeps/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/extras/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/di/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/kotlin/module.gradle"
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion compile_version
+    buildToolsVersion tools_version
 
     defaultConfig {
         applicationId "com.simplekjl.githubbrowser"
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode code_version
+        versionName name_version
+        buildConfigField "String", "BASE_GITHUB_URL_API", url_path
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            applicationIdSuffix ".release"
+            minifyEnabled true
+            manifestPlaceholders = [hostname: "api.github.com/search/"]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            manifestPlaceholders = [hostname: "api.github.com/search/"]
+            // in case we add some variant for dev
+            minifyEnabled false
+            debuggable true
+
         }
     }
     compileOptions {
@@ -30,16 +53,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    // all dependencies are into small modules
 }
