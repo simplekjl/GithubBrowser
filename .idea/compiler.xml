@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="GithubBrowser.app" target="1.8" />
       <module name="GithubBrowser.data" target="1.8" />
+      <module name="GithubBrowser.usecases" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.simplekjl.data.model
+package com.simplekjl.domain.model
 
 import com.google.gson.annotations.SerializedName
 

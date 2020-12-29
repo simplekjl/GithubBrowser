@@ -1,6 +1,6 @@
 package com.simplekjl.data.client
 
-import com.simplekjl.data.model.RepositoriesPayload
+import com.simplekjl.domain.model.RepositoriesPayload
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers

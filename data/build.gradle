@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
     id 'kotlin'
     id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 apply from: "$rootProject.projectDir/.dependencies/kotlin/module.gradle"
@@ -16,12 +17,10 @@ repositories {
     mavenCentral()
     google()
     jcenter()
-    maven {
-        url 'https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp'
-    }
 }
 
 dependencies {
+    implementation project(':domain')
     implementation 'androidx.room:room-runtime:2.2.6'
     implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version"
 }
