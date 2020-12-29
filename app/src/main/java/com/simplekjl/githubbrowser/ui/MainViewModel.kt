@@ -21,10 +21,10 @@ class MainViewModel(
     val state: LiveData<State>
         get() = _state
 
-    fun getRepositoriesTest() {
+    fun searchRepositories(searchText: String) {
         GlobalScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
-                val result = repositoriesUseCase.getRepositories("GithubBrowser")
+                val result = repositoriesUseCase.getRepositories(searchText)
                 when (result) {
                     is Result.Success -> {
                         _state.postValue(
