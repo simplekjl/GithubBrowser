@@ -1,0 +1,7 @@
+apply from: "$rootProject.projectDir/.dependencies/versions.gradle"
+
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:mockwebserver:$mockServerVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLogginVersion"
+}

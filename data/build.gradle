@@ -1,13 +1,27 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'kotlin-kapt'
 }
 
 apply from: "$rootProject.projectDir/.dependencies/kotlin/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/network/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/persistency/module.gradle"
+
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven {
+        url 'https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp'
+    }
 }
 
 dependencies {
+    implementation 'androidx.room:room-runtime:2.2.6'
+    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version"
 }

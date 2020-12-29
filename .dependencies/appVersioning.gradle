@@ -6,4 +6,5 @@ ext {
     code_version = 1
     name_version = '1.0'
     url_path = "\"https://api.github.com/search/\""
+    url_path_debug = "\"https://api.github.com/search/\""
 }

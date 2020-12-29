@@ -10,6 +10,7 @@ plugins {
 apply from: "$rootProject.projectDir/.dependencies/appVersioning.gradle"
 apply from: "$rootProject.projectDir/.dependencies/testing/module.gradle"
 apply from: "$rootProject.projectDir/.dependencies/network/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/network/extras.gradle"
 apply from: "$rootProject.projectDir/.dependencies/androidDeps/module.gradle"
 apply from: "$rootProject.projectDir/.dependencies/extras/module.gradle"
 apply from: "$rootProject.projectDir/.dependencies/di/module.gradle"
@@ -25,6 +26,7 @@ android {
         versionCode code_version
         versionName name_version
         buildConfigField "String", "BASE_GITHUB_URL_API", url_path
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
@@ -36,9 +38,11 @@ android {
             minifyEnabled true
             manifestPlaceholders = [hostname: "api.github.com/search/"]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_GITHUB_URL_API", url_path
         }
         debug {
             applicationIdSuffix ".debug"
+            buildConfigField "String", "BASE_GITHUB_URL_API", url_path_debug
             manifestPlaceholders = [hostname: "api.github.com/search/"]
             // in case we add some variant for dev
             minifyEnabled false
@@ -59,5 +63,6 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':data')
     // all dependencies are into small modules
 }
