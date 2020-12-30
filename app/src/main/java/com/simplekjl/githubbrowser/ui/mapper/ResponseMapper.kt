@@ -31,7 +31,8 @@ class ResponseMapper(private val applicationContext: Context) {
             raw.name,
             raw.repoName,
             raw.description ?: applicationContext.getString(R.string.no_description),
-            mapRawOwnerToUi(raw.owner)
+            mapRawOwnerToUi(raw.owner),
+            raw.repoUrl
         )
     }
 }

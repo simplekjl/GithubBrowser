@@ -1,19 +1,23 @@
 package com.simplekjl.githubbrowser.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.databinding.DataBindingUtil
 import com.simplekjl.githubbrowser.R
 import com.simplekjl.githubbrowser.databinding.ActivityMainBinding
+import com.simplekjl.githubbrowser.ui.adapter.OnItemClick
 import com.simplekjl.githubbrowser.ui.adapter.RepositoryAdapter
+import com.simplekjl.githubbrowser.ui.model.RepositoryViewEntity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnItemClick {
 
     private val mainViewModel: MainViewModel by viewModel()
-    private val repositoryAdapter: RepositoryAdapter by lazy { RepositoryAdapter() }
+    private val repositoryAdapter: RepositoryAdapter by lazy { RepositoryAdapter(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,4 +60,10 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.searchRepositories("%${searchText}%")
             }
         }
+
+    override fun onRepositoryClicked(repositoryViewEntity: RepositoryViewEntity) {
+        val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
+        val customTabsIntent: CustomTabsIntent = builder.build()
+        customTabsIntent.launchUrl(this, Uri.parse(repositoryViewEntity.repositoryUrl))
+    }
 }

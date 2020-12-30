@@ -24,10 +24,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class App : Application() {
+class GithubBrowserApplication : Application() {
 
     private val networkModule = createNetworkModule()
-    private val mainModule = createMainModule()
+    private val mainModule = createMainModule() // UI level
     private val dataModule = createDataModule()
 
     private fun createDataModule() = module {
@@ -70,7 +70,7 @@ class App : Application() {
         //start koin
         startKoin {
             androidLogger()
-            androidContext(this@App)
+            androidContext(this@GithubBrowserApplication)
             androidFileProperties()
             modules(
                 listOf(

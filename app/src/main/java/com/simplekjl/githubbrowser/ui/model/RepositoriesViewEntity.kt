@@ -17,5 +17,6 @@ data class RepositoryViewEntity(
     val name: String,
     val repoName: String,
     val description: String,
-    val owner: OwnerViewEntity
+    val owner: OwnerViewEntity,
+    val repositoryUrl: String
 )

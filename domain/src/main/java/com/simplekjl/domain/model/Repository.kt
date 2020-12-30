@@ -10,5 +10,7 @@ data class Repository(
     @SerializedName("description")
     val description: String?,
     @SerializedName("owner")
-    val owner: Owner
+    val owner: Owner,
+    @SerializedName("html_url")
+    val repoUrl: String
 )

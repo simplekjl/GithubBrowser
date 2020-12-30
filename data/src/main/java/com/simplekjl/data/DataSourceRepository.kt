@@ -39,11 +39,3 @@ interface NetworkSource {
 interface LocalSource {
     fun getDbInstance()
 }
-
-interface FakeSource {
-    fun getMockedContent()
-}
-
-interface BuiltType {
-    fun getBuiltType(): String
-}

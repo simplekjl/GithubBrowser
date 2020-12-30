@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.simplekjl.githubbrowser.databinding.RepositoryItemLayoutBinding
 import com.simplekjl.githubbrowser.ui.model.RepositoryViewEntity
 
-class RepositoryAdapter :
+class RepositoryAdapter(private val listener: OnItemClick) :
     ListAdapter<RepositoryViewEntity, RepositoryAdapter.RepositoryViewHolder>(RepositoryDiffUtil()) {
 
     private lateinit var repositoryItemLayoutBinding: RepositoryItemLayoutBinding
@@ -23,16 +23,12 @@ class RepositoryAdapter :
         holder.bind(getItem(position))
     }
 
-    // in case we add a click listener
-    fun getRepositoryAt(position: Int): RepositoryViewEntity {
-        return getItem(position)
-    }
-
     inner class RepositoryViewHolder(private val binding: RepositoryItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RepositoryViewEntity) {
             binding.repository = item
+            binding.cardRepositoryContainer.setOnClickListener { listener.onRepositoryClicked(item) }
             binding.executePendingBindings()
         }
     }
