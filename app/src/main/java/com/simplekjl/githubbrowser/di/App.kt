@@ -8,6 +8,7 @@ import com.simplekjl.data.client.GithubService
 import com.simplekjl.githubbrowser.BuildConfig
 import com.simplekjl.githubbrowser.framework.InMemoryRepositories
 import com.simplekjl.githubbrowser.framework.RepositoriesSource
+import com.simplekjl.githubbrowser.framework.StringProvider
 import com.simplekjl.githubbrowser.ui.MainViewModel
 import com.simplekjl.githubbrowser.ui.mapper.ResponseMapper
 import com.simplekjl.usecases.GetRepositoriesByKeyWord
@@ -36,9 +37,10 @@ class App : Application() {
     }
 
     private fun createMainModule() = module {
+        factory { StringProvider(applicationContext) }
         factory { ResponseMapper(applicationContext) }
         factory { GetRepositoriesByKeyWord(get()) }
-        viewModel { MainViewModel(get(), get()) }
+        viewModel { MainViewModel(get(), get(), get()) }
     }
 
     private fun createNetworkModule() = module {
@@ -71,7 +73,8 @@ class App : Application() {
             androidContext(this@App)
             androidFileProperties()
             modules(
-                listOf(dataModule,
+                listOf(
+                    dataModule,
                     networkModule, mainModule
                 )
             )

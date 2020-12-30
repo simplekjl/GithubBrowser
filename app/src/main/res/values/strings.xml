@@ -2,4 +2,8 @@
     <string name="app_name">GithubBrowser</string>
     <string name="no_description">No description available</string>
     <string name="search_action">Search</string>
+    <string name="empty_message">There are no repositories to show, \n start with a key word to search.</string>
+    <string name="image_description">user profile image</string>
+    <string name="error_message">Something went wrong, \n Please try again.</string>
+    <string name="network_error">There is an issue with the your network. \n Check your internet connection and try again.</string>
 </resources>

@@ -2,24 +2,30 @@ package com.simplekjl.githubbrowser.ui
 
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import com.simplekjl.githubbrowser.R
+import com.simplekjl.githubbrowser.databinding.ActivityMainBinding
+import com.simplekjl.githubbrowser.ui.adapter.RepositoryAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+
     private val mainViewModel: MainViewModel by viewModel()
+    private val repositoryAdapter: RepositoryAdapter by lazy { RepositoryAdapter() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        mainViewModel.state.observe(this, Observer {
-            when (it) {
-                is State.Data -> Toast.makeText(this, it.data.toString(), Toast.LENGTH_SHORT).show()
-            }
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main
+        )
+        binding.adapter = repositoryAdapter
+        mainViewModel.state.observe(this, {
+            binding.screenState = it
         })
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -37,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // this can be improved if we want to listen in another time
-                getTasks(query)
+                searchWithQuery(query)
                 return true
             }
 
@@ -46,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-            private fun getTasks(searchText: String) {
+            private fun searchWithQuery(searchText: String) {
                 mainViewModel.searchRepositories("%${searchText}%")
             }
         }
