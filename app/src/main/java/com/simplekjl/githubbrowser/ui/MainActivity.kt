@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), OnItemClick {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                // DO something in between
+                // Do something in between
                 return true
             }
 

@@ -1,16 +1,16 @@
 package com.simplekjl.githubbrowser.di
 
 import android.app.Application
-import com.simplekjl.data.DataSourceRepository
-import com.simplekjl.data.LocalSource
-import com.simplekjl.data.NetworkSource
+import com.simplekjl.data.repository.DataSourceRepository
+import com.simplekjl.data.repository.LocalSource
+import com.simplekjl.data.repository.NetworkSource
 import com.simplekjl.data.client.GithubService
 import com.simplekjl.githubbrowser.BuildConfig
 import com.simplekjl.githubbrowser.framework.InMemoryRepositories
 import com.simplekjl.githubbrowser.framework.RepositoriesSource
 import com.simplekjl.githubbrowser.framework.StringProvider
 import com.simplekjl.githubbrowser.ui.MainViewModel
-import com.simplekjl.githubbrowser.ui.mapper.ResponseMapper
+import com.simplekjl.githubbrowser.ui.mapper.RepositoriesPayloadMapper
 import com.simplekjl.usecases.GetRepositoriesByKeyWord
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -38,7 +38,7 @@ class GithubBrowserApplication : Application() {
 
     private fun createMainModule() = module {
         factory { StringProvider(applicationContext) }
-        factory { ResponseMapper(applicationContext) }
+        factory { RepositoriesPayloadMapper(applicationContext) }
         factory { GetRepositoriesByKeyWord(get()) }
         viewModel { MainViewModel(get(), get(), get()) }
     }

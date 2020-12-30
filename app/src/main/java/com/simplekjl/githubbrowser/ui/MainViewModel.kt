@@ -9,13 +9,13 @@ import androidx.lifecycle.viewModelScope
 import com.simplekjl.data.client.Result
 import com.simplekjl.githubbrowser.R
 import com.simplekjl.githubbrowser.framework.StringProvider
-import com.simplekjl.githubbrowser.ui.mapper.ResponseMapper
+import com.simplekjl.githubbrowser.ui.mapper.RepositoriesPayloadMapper
 import com.simplekjl.usecases.GetRepositoriesByKeyWord
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val repositoriesUseCase: GetRepositoriesByKeyWord,
-    private val responseMapper: ResponseMapper,
+    private val responseMapper: RepositoriesPayloadMapper,
     private val stringProvider: StringProvider
 ) : AndroidViewModel(Application()) {
 

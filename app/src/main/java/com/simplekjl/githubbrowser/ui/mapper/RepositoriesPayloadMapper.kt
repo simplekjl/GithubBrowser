@@ -9,7 +9,8 @@ import com.simplekjl.githubbrowser.ui.model.OwnerViewEntity
 import com.simplekjl.githubbrowser.ui.model.RepositoriesViewEntity
 import com.simplekjl.githubbrowser.ui.model.RepositoryViewEntity
 
-class ResponseMapper(private val applicationContext: Context) {
+class RepositoriesPayloadMapper(private val applicationContext: Context) {
+
     fun mapRawToUi(raw: RepositoriesPayload): RepositoriesViewEntity {
         val repositoriesViewEntity = RepositoriesViewEntity()
         repositoriesViewEntity.incompleteResults = raw.incompleteResults

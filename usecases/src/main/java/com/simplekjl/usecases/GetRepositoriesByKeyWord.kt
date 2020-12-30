@@ -1,6 +1,6 @@
 package com.simplekjl.usecases
 
-import com.simplekjl.data.DataSourceRepository
+import com.simplekjl.data.repository.DataSourceRepository
 import com.simplekjl.data.client.Result
 import com.simplekjl.domain.model.RepositoriesPayload
 

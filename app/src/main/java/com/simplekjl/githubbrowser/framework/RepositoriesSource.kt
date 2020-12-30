@@ -1,6 +1,6 @@
 package com.simplekjl.githubbrowser.framework
 
-import com.simplekjl.data.NetworkSource
+import com.simplekjl.data.repository.NetworkSource
 import com.simplekjl.data.client.GithubService
 import org.koin.java.KoinJavaComponent.inject
 

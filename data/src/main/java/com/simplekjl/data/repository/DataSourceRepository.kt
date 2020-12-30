@@ -1,5 +1,6 @@
-package com.simplekjl.data
+package com.simplekjl.data.repository
 
+import com.simplekjl.data.RepositoryContract
 import com.simplekjl.data.client.GithubService
 import com.simplekjl.data.client.Result
 import com.simplekjl.domain.model.RepositoriesPayload
@@ -27,15 +28,3 @@ class DataSourceRepository(
     }
 }
 
-interface RepositoryContract {
-    suspend fun getMatchingRepositories(searchText: String): Result<RepositoriesPayload>
-    suspend fun getPersistedRepositories(): List<Repository>
-}
-
-interface NetworkSource {
-    fun getGithubClient(): GithubService
-}
-
-interface LocalSource {
-    fun getDbInstance()
-}
