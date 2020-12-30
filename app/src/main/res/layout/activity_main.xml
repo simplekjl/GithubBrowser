@@ -46,8 +46,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:loadRepositories="@{screenState.itemsOnList.component3()}"
-            app:repositoriesAdapter="@{adapter}" />
+            android:loadRepositories="@{screenState.itemsOnList.component4()}"
+            android:repositoriesAdapter="@{adapter}" />
 
         <ProgressBar
             android:id="@+id/progressBar"

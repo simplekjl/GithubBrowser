@@ -31,10 +31,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/image_description"
+                android:loadImage="@{repository.owner.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{repository.owner.imageUrl}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView

@@ -7,5 +7,5 @@ import com.simplekjl.domain.model.Repository
 
 interface RepositoryContract {
     suspend fun getMatchingRepositories(searchText: String): Result<RepositoriesPayload>
-    suspend fun getPersistedRepositories(): List<Repository>
+    suspend fun getPersistedRepositories(): RepositoriesPayload
 }

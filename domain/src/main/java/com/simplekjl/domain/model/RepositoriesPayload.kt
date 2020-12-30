@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class RepositoriesPayload(
     @SerializedName("total_count")
-    val totalCount: Int,
+    var totalCount: Int = 0,
     @SerializedName("incomplete_results")
-    val incompleteResults: Boolean,
+    var incompleteResults: Boolean = false,
     @SerializedName("items")
-    val items: ArrayList<Repository>
+    var items: ArrayList<Repository> = arrayListOf()
 )

@@ -14,7 +14,8 @@ apply from: "$rootProject.projectDir/.dependencies/network/extras.gradle"
 apply from: "$rootProject.projectDir/.dependencies/androidDeps/module.gradle"
 apply from: "$rootProject.projectDir/.dependencies/extras/module.gradle"
 apply from: "$rootProject.projectDir/.dependencies/di/module.gradle"
-apply from: "$rootProject.projectDir/.dependencies/kotlin/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/di/module.gradle"
+apply from: "$rootProject.projectDir/.dependencies/persistency/module.gradle"
 android {
     compileSdkVersion compile_version
     buildToolsVersion tools_version

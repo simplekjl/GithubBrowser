@@ -8,7 +8,7 @@ import com.simplekjl.githubbrowser.ui.adapter.RepositoryAdapter
 import com.simplekjl.githubbrowser.ui.model.RepositoryViewEntity
 import com.squareup.picasso.Picasso
 
-@BindingAdapter("app:loadImage")
+@BindingAdapter("android:loadImage")
 fun setImageViewResource(imageView: ImageView, resource: String) {
     Picasso.get()
         .load(resource)
@@ -18,14 +18,12 @@ fun setImageViewResource(imageView: ImageView, resource: String) {
         .into(imageView)
 }
 
-@BindingAdapter("app:loadRepositories", "app:repositoriesAdapter", requireAll = true)
+@BindingAdapter("android:loadRepositories", "android:repositoriesAdapter", requireAll = true)
 fun setImageViewResource(
     recyclerView: RecyclerView,
     list: List<RepositoryViewEntity>,
     adapter: RepositoryAdapter
 ) {
-//    recyclerView.layoutManager =
-//        LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
     recyclerView.adapter = adapter
     adapter.submitList(list)
 }

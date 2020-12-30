@@ -1,16 +1,20 @@
 package com.simplekjl.githubbrowser.di
 
 import android.app.Application
+import androidx.room.Room
+import com.simplekjl.data.client.GithubService
 import com.simplekjl.data.repository.DataSourceRepository
 import com.simplekjl.data.repository.LocalSource
 import com.simplekjl.data.repository.NetworkSource
-import com.simplekjl.data.client.GithubService
 import com.simplekjl.githubbrowser.BuildConfig
 import com.simplekjl.githubbrowser.framework.InMemoryRepositories
 import com.simplekjl.githubbrowser.framework.RepositoriesSource
 import com.simplekjl.githubbrowser.framework.StringProvider
+import com.simplekjl.githubbrowser.framework.database.AppDatabase
+import com.simplekjl.githubbrowser.framework.database.DATABASE_NAME
 import com.simplekjl.githubbrowser.ui.MainViewModel
 import com.simplekjl.githubbrowser.ui.mapper.RepositoriesPayloadMapper
+import com.simplekjl.githubbrowser.ui.mapper.RepositoriesViewEntityMapper
 import com.simplekjl.usecases.GetRepositoriesByKeyWord
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,14 +34,22 @@ class GithubBrowserApplication : Application() {
     private val mainModule = createMainModule() // UI level
     private val dataModule = createDataModule()
 
+
     private fun createDataModule() = module {
         factory<NetworkSource> { RepositoriesSource() }
-        factory<LocalSource> { InMemoryRepositories() }
+        factory<LocalSource> { InMemoryRepositories(get(), get()) }
         factory { DataSourceRepository(get(), get()) }
     }
 
     private fun createMainModule() = module {
+        single {
+            Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java, DATABASE_NAME
+            ).build()
+        }
         factory { StringProvider(applicationContext) }
+        factory { RepositoriesViewEntityMapper() }
         factory { RepositoriesPayloadMapper(applicationContext) }
         factory { GetRepositoriesByKeyWord(get()) }
         viewModel { MainViewModel(get(), get(), get()) }

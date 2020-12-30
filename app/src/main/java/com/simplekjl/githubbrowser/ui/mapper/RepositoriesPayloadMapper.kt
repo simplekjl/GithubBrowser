@@ -24,16 +24,22 @@ class RepositoriesPayloadMapper(private val applicationContext: Context) {
     }
 
     private fun mapRawOwnerToUi(raw: Owner): OwnerViewEntity {
-        return OwnerViewEntity(raw.username, raw.imageUrl, raw.reposUrl, raw.profileUrl)
+        return OwnerViewEntity(
+            uid = 0,
+            username = raw.username,
+            imageUrl = raw.imageUrl,
+            reposUrl = raw.reposUrl,
+            profileUrl = raw.profileUrl
+        )
     }
 
     private fun mapRawRepositoryToUi(raw: Repository): RepositoryViewEntity {
         return RepositoryViewEntity(
-            raw.name,
-            raw.repoName,
-            raw.description ?: applicationContext.getString(R.string.no_description),
-            mapRawOwnerToUi(raw.owner),
-            raw.repoUrl
+            0, name = raw.name,
+            repoName = raw.repoName,
+            description = raw.description ?: applicationContext.getString(R.string.no_description),
+            owner = mapRawOwnerToUi(raw.owner),
+            repositoryUrl = raw.repoUrl
         )
     }
 }
