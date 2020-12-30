@@ -67,4 +67,8 @@ class MainViewModel(
             }
         }
     }
+
+    fun loading() {
+        _state.value = ScreenState(isLoading = true)
+    }
 }

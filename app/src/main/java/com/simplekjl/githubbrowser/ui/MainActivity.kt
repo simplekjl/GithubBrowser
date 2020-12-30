@@ -52,12 +52,12 @@ class MainActivity : AppCompatActivity(), OnItemClick {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                // getTasks(newText)
+                // DO something in between
                 return true
             }
 
             private fun searchWithQuery(searchText: String) {
-                mainViewModel.searchRepositories("%${searchText}%")
+                mainViewModel.searchRepositories(searchText)
             }
         }
 
