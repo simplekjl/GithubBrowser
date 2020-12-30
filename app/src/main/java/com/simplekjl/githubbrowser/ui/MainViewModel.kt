@@ -28,6 +28,7 @@ class MainViewModel(
         get() = _state
 
     fun searchRepositories(searchText: String) {
+        _state.value = ScreenState(isLoading = true, showMessage = false)
         viewModelScope.launch {
             try {
                 val result = repositoriesUseCase.getRepositories(searchText)
